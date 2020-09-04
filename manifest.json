@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "Track Distractions",
+    "version": "1.0",
+    "homepage_url": "https://github.com/funartic/stop-distractions",
+    "description": "Addon to track distractions during learning",
+    "icons": {
+        "48": "icons/beasts-48.png"
+    },
+    "permissions": [
+        "activeTab"
+    ],
+
+    "applications": {
+        "gecko": {
+            "id": "d.holzinger93@gmail.com"
+        }
+    },
+    "browser_action": {
+        "default_icon": "icons/beasts-32.png",
+        "default_title": "Track Distractions",
+        "default_popup": "popup/choose_beast.html"
+      },
+      "web_accessible_resources": [
+        "beasts/frog.jpg",
+        "beasts/turtle.jpg",
+        "beasts/snake.jpg"
+      ]
+}
