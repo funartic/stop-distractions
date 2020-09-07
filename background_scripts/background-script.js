@@ -5,7 +5,8 @@ async function find() {
     // current page.
     let this_tab_url = browser.runtime.getURL("../ext_webpage/distraction_overview.html");
     let tabs = await browser.tabs.query({});
-  
+    let activeTab = await browser.tabs.query({active: true});
+
     for (let tab of tabs) {
       // Iterate through the tabs, but exclude the current tab.
       if (tab.url === this_tab_url) {
@@ -35,3 +36,8 @@ async function find() {
   browser.browserAction.onClicked.addListener(() => {
     browser.tabs.create({"url": "../ext_webpage/distraction_overview.html"});
   });
+
+  browser.tabs.onUpdated.addListener(() => {
+    find();
+  });
+
