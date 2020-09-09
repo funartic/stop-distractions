@@ -24,3 +24,13 @@ function handleMessage(request, sender, response) {
 }
 
 browser.runtime.onMessage.addListener(handleMessage);
+
+browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
+  console.log(`The tab with id: ${tabId}, is closing`);
+  backgroundPage.find();
+});
+
+browser.tabs.onCreated.addListener((tab) => {
+  console.log(`The tab with id: ${tab.id}, is created`);
+  backgroundPage.find();
+});
