@@ -1,4 +1,5 @@
 async function find() {
+  console.log("find");
     browser.runtime.sendMessage({msg: "clear-results"});
   
     let this_tab_url = browser.runtime.getURL("../ext_webpage/distraction_overview.html");
@@ -13,7 +14,6 @@ async function find() {
         continue;
       }
   
-
       browser.runtime.sendMessage({
         msg: "found-result",
         id: tab.id,

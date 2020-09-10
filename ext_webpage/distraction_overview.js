@@ -1,10 +1,20 @@
-let backgroundPage = browser.extension.getBackgroundPage();
+
+function onGot(page) {
+  console.log(page);
+  window.runtime.find();
+}
+
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+let backgroundPage = browser.runtime.getBackgroundPage();
 
 // NOTE: A different event, load, should be used only to detect a fully-loaded page. It is a common mistake to use load where DOMContentLoaded would be more appropriate.
 document.addEventListener("DOMContentLoaded", function(e) {
   // Send the query from the form to the background page.
   console.log('DOM fully loaded and parsed');
-  backgroundPage.find();
+  backgroundPage.then(onGot, onError);
   e.preventDefault();
 });
 

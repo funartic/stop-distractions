@@ -13,8 +13,8 @@
         "tabs"
     ],
     "background": {
-        "scripts": ["background_scripts/background-script.js"]
-      },
+      "page": "background_scripts/background-page.html"
+    },
     "applications": {
         "gecko": {
             "id": "d.holzinger93@gmail.com"
