@@ -1,20 +1,44 @@
+async function find() {
+  console.log("find");
+    browser.runtime.sendMessage({msg: "clear-results"});
+  
+    let this_tab_url = browser.runtime.getURL("../ext_webpage/distraction_overview.html");
+    let tabs = await browser.tabs.query({});
+    let activeTab = await browser.tabs.query({active: true});
+
+    // check if distraction_overview is loaded.
+
+    for (let tab of tabs) {
+      // Iterate through the tabs, but exclude the current tab.
+      if (tab.url === this_tab_url) {
+        continue;
+      }
+  
+      browser.runtime.sendMessage({
+        msg: "found-result",
+        id: tab.id,
+        url: tab.url,
+        asd: tab
+       // count: result.count
+      });
+    }
+  }
 
 function onGot(page) {
   console.log(page);
-  window.runtime.find();
+  find();
 }
 
 function onError(error) {
   console.log(`Error: ${error}`);
 }
 
-let backgroundPage = browser.runtime.getBackgroundPage();
 
 // NOTE: A different event, load, should be used only to detect a fully-loaded page. It is a common mistake to use load where DOMContentLoaded would be more appropriate.
 document.addEventListener("DOMContentLoaded", function(e) {
   // Send the query from the form to the background page.
   console.log('DOM fully loaded and parsed');
-  backgroundPage.then(onGot, onError);
+  find();
   e.preventDefault();
 });
 
@@ -37,10 +61,10 @@ browser.runtime.onMessage.addListener(handleMessage);
 
 browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
   console.log(`The tab with id: ${tabId}, is closing`);
-  backgroundPage.find();
+  find();
 });
 
 browser.tabs.onCreated.addListener((tab) => {
   console.log(`The tab with id: ${tab.id}, is created`);
-  backgroundPage.find();
+  find();
 });
