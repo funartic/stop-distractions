@@ -13,7 +13,7 @@
         "tabs"
     ],
     "background": {
-      "page": "background_scripts/background-page.html"
+      "page": "a_controller/background-page.html"
     },
     "applications": {
         "gecko": {
