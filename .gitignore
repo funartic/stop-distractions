@@ -1,0 +1,4 @@
+/* Don't commit jsdoc output */
+out/
+out/*
+out/**
